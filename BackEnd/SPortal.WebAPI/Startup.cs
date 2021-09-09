@@ -37,7 +37,7 @@ namespace SPortal.WebAPI
             services.AddDbContext<SPortalContext>(opt=>{
                 opt = spctx;
             });
-        
+            //Service Injected
             services.AddSingleton<ICategoryRepository,CategoryRepository>(c=>new CategoryRepository(new SPortalContext(spctx.Options)));
         }
 
