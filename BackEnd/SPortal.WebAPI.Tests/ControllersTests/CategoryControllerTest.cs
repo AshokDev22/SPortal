@@ -55,7 +55,7 @@ namespace SPortal.WebAPI.Tests.ControllersTests
             //Act
             var result = controller.GetCategories();
 
-            cList[1].CName = "LMN";
+            //cList[1].CName = "LMN";
             //Assert
             result.Should().NotBeEmpty();
             result.Should().BeEquivalentTo(cList,options=>options.ComparingByMembers<Category>());
