@@ -13,7 +13,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotnetCoreCLI@3
+- task: DotnetCoreCLI@2
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
