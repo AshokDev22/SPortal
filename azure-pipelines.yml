@@ -26,6 +26,7 @@ steps:
     publishWebProjects: false
     projects: 'BackEnd/SPortal.WebAPI/SPortal.WebAPI.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
