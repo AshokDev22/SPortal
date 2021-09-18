@@ -5,6 +5,8 @@ using System.Linq;
 using SPortal.WebAPI.Model.Context;
 using SPortal.WebAPI.Model.Entities;
 using SPortal.WebAPI.Model.Repositories.Contract;
+using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace SPortal.WebAPI.Model.Repositories
 {
@@ -19,12 +21,14 @@ namespace SPortal.WebAPI.Model.Repositories
 
         public void AddCategory(Category cat)
         {
-            throw new System.NotImplementedException();
+            _context.Categories.Add(cat);
+            _context.SaveChanges();
         }
 
         public bool EditCategory(Category cat)
         {
-            throw new System.NotImplementedException();
+            _context.Categories.Update(cat);
+            _context.SaveChanges();
         }
 
         public virtual IEnumerable<Category> GetCategories()
@@ -32,17 +36,24 @@ namespace SPortal.WebAPI.Model.Repositories
             if(_context.Categories.Count()<= 0)
                 return Array.Empty<Category>();
             else
-                return _context.Categories.AsEnumerable();
+                
+                return _context.Categories.AsNoTracking().AsEnumerable();
         }
 
-        public IEnumerable<Category> GetCategoriesByName()
+        public IEnumerable<Category> GetCategoriesByName(string cname)
         {
-            throw new System.NotImplementedException();
+            return _context.Categories.Where(x=>x.CName.StartsWith(cname)).AsNoTracking().AsEnumerable();
         }
 
-        public Category GetCategoryByID()
+        public Category GetCategoryByID(Guid cid)
         {
-            throw new System.NotImplementedException();
+            return _context.Categories.AsNoTracking().Single(x=>x.CID == cid);
+        }
+
+        public Category GetCategoryByName(string cname)
+        {
+            Category c = _context.Categories.AsNoTracking().Single(x=>x.CName.Equals(cname));
+            return c;
         }
 
         public bool RemoveCategory(Category cat)
