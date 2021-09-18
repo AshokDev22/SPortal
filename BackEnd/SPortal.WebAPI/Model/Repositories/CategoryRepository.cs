@@ -29,6 +29,7 @@ namespace SPortal.WebAPI.Model.Repositories
         {
             _context.Categories.Update(cat);
             _context.SaveChanges();
+            return true;
         }
 
         public virtual IEnumerable<Category> GetCategories()
@@ -36,7 +37,6 @@ namespace SPortal.WebAPI.Model.Repositories
             if(_context.Categories.Count()<= 0)
                 return Array.Empty<Category>();
             else
-                
                 return _context.Categories.AsNoTracking().AsEnumerable();
         }
 
